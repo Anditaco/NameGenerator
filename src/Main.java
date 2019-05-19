@@ -3,13 +3,24 @@ public class Main {
     //Has a parser which takes data
     //Has a generator which processes data
     public static void main(String[] args){
-        String[] data = {"John", "Stu", "Lucas", "Joe"};
+        int[] weights = {5,50,25, 15, 5};
 
-        Collection collection = new Collection(5);
+        Collection collection = new Collection(weights);
         Generator generator = new Generator(collection);
         Parser parser = new Parser(collection);
 
-        parser.parse(data);
-        collection.displayContents();
+
+        Formater formater = new Formater();
+
+        try {
+            parser.parse(formater.format("Boy_Names"));
+            //collection.displayContents();
+            for(int i = 0; i < 1000; i++)
+                generator.generate();
+        }
+        catch (Exception e){
+            System.out.println("Error reading file");
+            System.out.println(e.getMessage());
+        }
     }
 }

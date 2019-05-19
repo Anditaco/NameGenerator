@@ -1,36 +1,18 @@
 import java.util.ArrayList;
 
-public class Layer {
+class Layer {
     //A Layer is a collection of segments of a known length
     //it is responsible for organizing the segments and distributing their probabilities upon request
 
-    ArrayList<Segment> segments = new ArrayList<>();
-    int segmentSize;
+    private ArrayList<Segment> segments = new ArrayList<>();
+    private int segmentSize;
 
-    public Layer(int size) {
+    Layer(int size) {
         segmentSize = size;
     }
 
 
-    //temp
-    public ArrayList<Character> probabilities(String pre){
-
-        ArrayList<Character> possibilities = new ArrayList<>();
-        for (
-                Segment s : segments) {
-            if (s.getContent().substring(0, segmentSize - 1).equals(pre)) {
-                for (int i = 0; i < s.getHitCount(); i++) {
-                    possibilities.add(s.getContent().toCharArray()[segmentSize - 1]);
-                }
-            }
-        }
-        return possibilities;
-
-    }
-    // end temp
-
-
-    public char mostLikely(String pre){
+    ArrayList<Character> possibilities(String pre){
         ArrayList<Character> possibilities = new ArrayList<>();
         for(Segment s : segments){
             if(s.getContent().substring(0,segmentSize-1).equals(pre)){
@@ -39,10 +21,10 @@ public class Layer {
                 }
             }
         }
-        return possibilities.get((int)(Math.random() * possibilities.size()));
+        return possibilities;
     }
 
-    public void put(String substring){
+    void put(String substring){
         if(!containsString(substring)) segments.add(new Segment(substring));
 
     }
@@ -57,11 +39,11 @@ public class Layer {
         return false;
     }
 
-    public ArrayList<Segment> getSegments(){
+    ArrayList<Segment> getSegments(){
         return segments;
     }
 
-    public int getSegmentSize(){
+    int getSegmentSize(){
         return segmentSize;
     }
 }

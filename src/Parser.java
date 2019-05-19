@@ -1,15 +1,17 @@
-public class Parser {
+import java.util.ArrayList;
+
+class Parser {
     //The parser is responsible for loading the data into the collection
     //It does so by iterating over all possible segments in the datum and registering hits
-    Collection collection;
-    public Parser(Collection c){
+    private Collection collection;
+    Parser(Collection c){
         collection = c;
     }
 
-    public void parse(String[] data){
+    void parse(ArrayList<String> data){
         for(String datum : data){
             for(int i = 0; i < datum.length(); i++){
-                int max = Math.min(datum.length()-i+1, collection.getDepth()+1);
+                int max = Math.min(datum.length()-i+1, collection.getMaximumSize()+1);
                 for(int l = 1; l < max; l++){
                     collection.put(toLowercase(datum.substring(i, i+l)));
                 }
